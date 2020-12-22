@@ -15,6 +15,10 @@ services:
     restart: always
     build: ./images/php7.0.5
     container_name: php7.0.5
+    links:
+      - nginx:pms.test
+      - nginx:www.spm.test
+      - nginx:ifs.test
     environment:
       TZ: Asia/Shanghai
     volumes:
@@ -25,6 +29,10 @@ services:
     restart: always
     build: ./images/php5.6.22
     container_name: php5.6.22
+    links:
+      - nginx:pms.test
+      - nginx:www.spm.test
+      - nginx:ifs.test
     environment:
       TZ: Asia/Shanghai
     volumes:
