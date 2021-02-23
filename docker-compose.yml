@@ -52,3 +52,18 @@ services:
       - ./conf/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ~/Code/php:/var/www
       - ~/Code/config:/data/www/apollo-config
+  gitlab:
+    image: gitlab/gitlab-ce
+    container_name: gitlab
+    links:
+      - nginx:pkg.august.test
+    restart: always
+    hostname: pkg.august.test
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://pkg.august.test'
+    volumes:
+      - '$GITLAB_HOME/config:/etc/gitlab'
+      - '$GITLAB_HOME/logs:/var/log/gitlab'
+      - '$GITLAB_HOME/data:/var/opt/gitlab'
+
