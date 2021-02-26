@@ -66,4 +66,15 @@ services:
       - '$GITLAB_HOME/config:/etc/gitlab'
       - '$GITLAB_HOME/logs:/var/log/gitlab'
       - '$GITLAB_HOME/data:/var/opt/gitlab'
+  gitlab-runner:
+    image: gitlab/gitlab-runner
+    container_name: gitlab-runner
+    links:
+      - nginx:pkg.august.test
+    restart: always
+    volumes:
+      - ~/.netrc:/root/.netrc
+      - ~/.netrc:/home/gitlab-runner/.netrc
+      - '$GITLAB_HOME/runner/config:/etc/gitlab-runner'
+      - '/var/run/docker.sock:/var/run/docker.sock'
 
