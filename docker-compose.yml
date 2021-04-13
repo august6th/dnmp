@@ -1,7 +1,6 @@
 version: '3.1'
 services:
   mysql:
-    restart: always
     image: daocloud.io/library/mysql:5.7.4
     container_name: mysql5.7.4
     ports:
@@ -12,7 +11,6 @@ services:
     volumes:
       - ~/Docker/mysql5.7.4/data:/var/lib/mysql
   php7.0.5:
-    restart: always
     build: ./images/php7.0.5
     container_name: php7.0.5
     links:
@@ -26,7 +24,6 @@ services:
       - ~/Code/config:/data/www/apollo-config
       - ./conf/php7.0.5/docker-php-ext-xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
   php5.6.22:
-    restart: always
     build: ./images/php5.6.22
     container_name: php5.6.22
     links:
@@ -40,7 +37,6 @@ services:
       - ~/Code/config:/data/www/apollo-config
       - ./conf/php5.6.22/docker-php-ext-xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
   nginx:
-    restart: always
     image: nginx
     container_name: nginx
     ports:
@@ -57,7 +53,6 @@ services:
     container_name: gitlab
     links:
       - nginx:pkg.august.test
-    restart: always
     hostname: pkg.august.test
     environment:
       GITLAB_OMNIBUS_CONFIG: |
@@ -71,7 +66,6 @@ services:
     container_name: gitlab-runner
     links:
       - nginx:pkg.august.test
-    restart: always
     volumes:
       - ~/.netrc:/root/.netrc
       - ~/.netrc:/home/gitlab-runner/.netrc
